@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
     char buffer[MAXLINE]; 
     char message[BUFFER];
     struct sockaddr_in servaddr, cliaddr; 
-    struct hostent *hostp;
+    
     char *hostaddrp;
      if(argc < 2) {  
         printf(" error");  
@@ -54,15 +54,7 @@ int main(int argc, char *argv[]) {
     n = recvfrom(sockfd, (char *)buffer, MAXLINE,  
                 MSG_WAITALL, ( struct sockaddr *) &cliaddr, 
                 &len); 
-    hostp = gethostbyaddr((const char *)&cliaddr.sin_addr.s_addr, 
-              sizeof(cliaddr.sin_addr.s_addr), AF_INET);
-    if (hostp == NULL)
-      printf("error on gethostbyaddr");
-    hostaddrp = inet_ntoa(cliaddr.sin_addr);
-    if (hostaddrp == NULL)
-      printf("error");
-    printf("server received datagram from %s (%s)\n", 
-       hostp->h_name, hostaddrp);
+
     printf("server received  message %c%cfrom client: %s\n", MAXLINE, n, (char *)buffer); 
     
      printf ("enter your message: ") ;
